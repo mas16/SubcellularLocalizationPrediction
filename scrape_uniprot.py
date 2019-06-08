@@ -18,7 +18,6 @@ Libraries:
 by MAS 2019
 """
 
-
 import urllib.request
 import gzip
 import re
@@ -26,14 +25,30 @@ from Bio import SeqIO
 import pandas as pd
 import time
 
-start_time = time.time()
+###############################################################################
+# Enter information below
 
+# Name of Proteome
 NAME = "ecoli_proteome"
+
+# URL to compressed (gz) file with all sequences
 URL = "ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/" \
       "knowledgebase/reference_proteomes/Bacteria/UP000000625_83333.fasta.gz"
 
 
+###############################################################################
+
+# Timer
+start_time = time.time()
+
+
 def try_url(url, name):
+    """
+    Check URL, fetch, and extract FASTA file from compressed gz
+    :param url: URL to uniprot proteome FASTA file
+    :param name: str, proteome name
+    :return: fasta file as list
+    """
     try:
         urllib.request.urlretrieve(url, "./" + name + ".gz")
         return extract_file(name)
@@ -42,6 +57,11 @@ def try_url(url, name):
 
 
 def extract_file(name):
+    """
+    Extract FASTA file from compressed gz
+    :param name: str, proteome name
+    :return: list, extracted FASTA file split by protein
+    """
     f = gzip.open("./" + name + ".gz", "rt")
     file_contents = f.read()
     f.close()
@@ -51,9 +71,9 @@ def extract_file(name):
     return parsed_file
 
 
-def add_to_dictionary(entry):
+def add_to_dataframe(entry):
     """
-    Use regex to extract ID and sequence from each FASTA string.
+    Extract ID and sequence from each FASTA string (use regex).
     :param entry: str, FASTA string
     :return: ID, seq (both str)
     """
@@ -68,6 +88,12 @@ def add_to_dictionary(entry):
 
 
 def get_local(entry):
+    """
+    Scrape uniprot database for the subcellular localization of each protein
+    Define "undocumented" if no subcellular localization is reported
+    :param entry: str, uniprot ID extracted from FASTA file
+    :return: str, localization in {undocumented, soluble, membrane}
+    """
     handle = urllib.request.urlopen(
         "https://www.uniprot.org/uniprot/" + entry + ".xml")
     record = SeqIO.read(handle, "uniprot-xml")
@@ -82,14 +108,24 @@ def get_local(entry):
     return local
 
 
-proteome = try_url(URL, NAME)
+def generate_csv(url=URL, name=NAME):
+    """
+    Run everything, convert uniprot FASTA format to tidy pandas dataframe
+    containing only uniprot ID, sequence, and localization
+    :param url: str, URL to uniprot proteome FASTA file
+    :param name: str, proteome name
+    :return: None
+    """
+    proteome = try_url(url, name)
+    df = pd.DataFrame(columns=["ID", "Sequence", "Local"])
 
-df = pd.DataFrame(columns=["ID", "Sequence", "Local"])
+    for index, sequence in enumerate(proteome):
+        protid, aa = add_to_dataframe(sequence)
+        df.loc[index] = [protid, aa, get_local(protid)]
 
-for index, sequence in enumerate(proteome):
-    protid, aa = add_to_dictionary(sequence)
-    df.loc[index] = [protid, aa, get_local(protid)]
+    df.to_csv("./ecoli_proteome.csv", index=False)
 
-df.to_csv("./ecoli_proteome.csv", index=False)
 
-print('run time = ' + str(time.time() - start_time) + ' s')
+if __name__ == '__main__':
+    generate_csv()
+    print('run time = ' + str(time.time() - start_time) + ' s')
