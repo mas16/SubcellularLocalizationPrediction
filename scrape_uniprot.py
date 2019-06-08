@@ -73,7 +73,7 @@ def get_local(entry):
     record = SeqIO.read(handle, "uniprot-xml")
     try:
         local = record.annotations['comment_subcellularlocation_location'][0]
-        if "membrane" in local.split() or "Membrane" in local.split():
+        if "membrane" in local.lower().split():
             local = "membrane"
         elif local == "Cytoplasm" or local == "Periplasm":
             local = "soluble"
