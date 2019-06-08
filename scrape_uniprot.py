@@ -1,3 +1,24 @@
+"""
+Python 3.6
+
+This script performs the following:
+
+    - Fetch organism proteome FASTA file containing all protein sequences
+    - Clean FASTA data
+    - Scrape uniprot data based to retrieve protein subcellular localization
+    - Write uniprot ID, protein sequence, and subcellular localization to csv
+
+Takes 8 min to run for ~5000 proteins proteome on old a** macbookair with FIOS
+connection
+
+Libraries:
+    - Biopython
+    - Pandas
+
+by MAS 2019
+"""
+
+
 import urllib.request
 import gzip
 import re
