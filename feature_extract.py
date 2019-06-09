@@ -86,7 +86,7 @@ def aa_count(aa, dataframe):
     blank_df = pd.DataFrame(columns=aa)
     for index, row in dataframe.iterrows():
         counts = [row["Sequence"].count(a) / len(row["Sequence"])
-                  for a in aa[:-4]]
+                  for a in aa[:-len(scores)]]
         counts.extend(score(row["Sequence"]))
         blank_df.loc[index] = counts
     return blank_df
