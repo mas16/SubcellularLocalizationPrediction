@@ -80,7 +80,7 @@ AAS = tuple(aa_hydro.keys())
 
 
 def aa_count(aa, dataframe):
-    scores = ["hydro_mean", "hydro_med", "ss_mean", "ss_med"]
+    scores = ["hydro_mean", "ss_mean"]
     aa = list(aa)
     aa.extend(scores)
     blank_df = pd.DataFrame(columns=aa)
@@ -95,11 +95,7 @@ def aa_count(aa, dataframe):
 def score(sequence):
     hscore = [aa_hydro[res] for res in sequence]
     sscore = [aa_secon[res] for res in sequence]
-    h_mean = np.mean(hscore)
-    h_med = np.median(hscore)
-    s_mean = np.mean(sscore)
-    s_med = np.median(sscore)
-    return [h_mean, h_med, s_mean, s_med]
+    return [np.mean(hscore), np.mean(sscore)]
 
 
 def get_all_features(aas=AAS, df=DF):
