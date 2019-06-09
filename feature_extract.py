@@ -8,6 +8,10 @@ This script will extract numerical features from the sequence:
     - Average helical propensity
     - Median helical propensity
 
+Libraries:
+    - Pandas
+    - NumPy
+
 by MAS 06.2019
 """
 
