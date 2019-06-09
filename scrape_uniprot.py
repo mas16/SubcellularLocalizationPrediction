@@ -14,16 +14,17 @@ connection
 Libraries:
     - Biopython
     - Pandas
+    - NumPy
 
 by MAS 2019
 """
-
+from Bio import SeqIO
 import urllib.request
+import time
 import gzip
 import re
-from Bio import SeqIO
 import pandas as pd
-import time
+import numpy as np
 
 ###############################################################################
 # Enter information below
@@ -34,7 +35,6 @@ NAME = "ecoli_proteome"
 # URL to compressed (gz) file with all sequences
 URL = "ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/" \
       "knowledgebase/reference_proteomes/Bacteria/UP000000625_83333.fasta.gz"
-
 
 ###############################################################################
 
@@ -94,17 +94,21 @@ def get_local(entry):
     :param entry: str, uniprot ID extracted from FASTA file
     :return: str, localization in {undocumented, soluble, membrane}
     """
+    soluble = ["cytoplasm", "periplasm", "fimbrium", "secreted"]
     handle = urllib.request.urlopen(
         "https://www.uniprot.org/uniprot/" + entry + ".xml")
     record = SeqIO.read(handle, "uniprot-xml")
     try:
         local = record.annotations['comment_subcellularlocation_location'][0]
         if "membrane" in local.lower().split():
-            local = "membrane"
-        elif local == "Cytoplasm" or local == "Periplasm":
-            local = "soluble"
+            local = 1
+        elif local.lower() in soluble:
+            local = 0
+        else:
+            local = np.nan
     except KeyError:
-        local = "undocumented"
+        # Set missing data to NaN for use in Pandas later
+        local = np.nan
     return local
 
 
