@@ -25,6 +25,7 @@ from sklearn.utils import shuffle
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.model_selection import GridSearchCV
 
 df = pd.read_csv("./ecoli_proteome_features.csv")
 
@@ -36,24 +37,9 @@ print(len(list(df)[3:]))
 
 # We have a total of ~ 2000 observations.
 # We should make sure our features are ~10x less than number of observations.
-#
 
-# Check to see which features change the least between classifications
-for feature in list(df)[3:]:
-    #df.boxplot(column=feature, by="Local")
-    sns.boxplot(x="Local", y=feature, data=df)
-    plt.savefig("./" + feature + ".png")
-    plt.clf()
-
-# Based on the above, we can safely eliminate U, X, A,
+# Based on the box plots, we can eliminate U, X, A,
 df = df.drop(["U", "X", "A"], axis=1)
-
-# Check for multi-colinearity
-# Features start at column 3
-plt.figure(figsize=(12,10))
-cor = df[df.columns[3:]].corr()
-sns.heatmap(cor, annot=True, cmap=plt.cm.Reds)
-plt.savefig("./correlation_matrix.png")
 
 # Drop colinear features with abs(r) > 0.5
 df = df.drop(["ss_mean", "hydro_mean"], axis=1)
@@ -78,8 +64,8 @@ Y = array[:, 2]
 Y = Y.astype("int")
 
 # Size of validation set
-validation_size = 0.40
-seed = 7
+validation_size = 0.30
+seed = 1234
 
 # Test options and evaluation metric
 scoring = 'accuracy'
@@ -98,20 +84,17 @@ X_validation = sc.transform(X_validation)
 # Try different models
 models = []
 models.append(('LR', LogisticRegression()))
-models.append(('LDA', LinearDiscriminantAnalysis()))
-models.append(('KNN', KNeighborsClassifier()))
 models.append(('CART', DecisionTreeClassifier()))
-models.append(("RF", RandomForestClassifier(n_estimators=100, random_state=0)))
-models.append(("GB", GradientBoostingClassifier(n_estimators=100, random_state=0)))
-models.append(('NB', GaussianNB()))
+models.append(("RF", RandomForestClassifier(n_estimators=50, random_state=0)))
+models.append(("GB", GradientBoostingClassifier(n_estimators=50, random_state=0)))
 models.append(('SVM', SVC()))
 
 # Evaluate each model in turn
 results = []
 names = []
 for name, model in models:
-    # 10x cross validation
-    kfold = model_selection.KFold(n_splits=10, random_state=seed)
+    # 5x cross validation
+    kfold = model_selection.KFold(n_splits=5, random_state=seed)
     cv_results = model_selection.cross_val_score(model, X_train, Y_train,
                                                  cv=kfold, scoring=scoring)
     results.append(cv_results)
@@ -119,33 +102,33 @@ for name, model in models:
     msg = (name, cv_results.mean(), cv_results.std())
     print(msg)
 
-"""
-# Random Forests
-n_vals = [10, 20, 30, 50, 100, 150, 200]
-iterations = np.arange(0, 10)
 
-for n in n_vals :
-    scores = []
-    for _ in iterations:
-        classifier = RandomForestClassifier(n_estimators=n, random_state=0)
-        classifier.fit(X_train, Y_train)
-        Y_pred = classifier.predict(X_validation)
-        scores.append(accuracy_score(Y_validation, Y_pred))
-        #print(confusion_matrix(Y_validation,Y_pred))
-        #print(classification_report(Y_validation,Y_pred))
-        #print(accuracy_score(Y_validation, Y_pred))
-    print(n)
-    print(np.mean(scores))
-    print(np.std(scores, ddof=1))
 
-### MODEL ###
-classifier = RandomForestClassifier(n_estimators=50, random_state=0)
+# SVM parameter tuning using 5 fold cross validation
+kernels = ["rbf", "linear", "poly", "sigmoid"]
+cv_results = []
+results = []
+nfolds = 5
+for kernel in kernels:
+    Cs = [0.001, 0.01, 0.1, 1, 10]
+    gammas = [0.001, 0.01, 0.1, 1]
+    param_grid = {'C': Cs, 'gamma': gammas}
+    grid_search = GridSearchCV(SVC(kernel=kernel), param_grid, cv=nfolds)
+    grid_search.fit(X_train, Y_train)
+    c = grid_search.best_params_["C"]
+    gamma = grid_search.best_params_["gamma"]
+    kfold = model_selection.KFold(n_splits=5, random_state=seed)
+    cv_results = model_selection.cross_val_score(SVC(kernel=kernel, C=c, gamma=gamma), X_train, Y_train, cv=kfold, scoring=scoring)
+    results.append(cv_results)
+    print(kernel)
+    print(grid_search.best_params_)
+    print(cv_results.mean(), cv_results.std())
+
+
+# Apply final model to validation set
+classifier = SVC(kernel="rbf", C=10, gamma=0.01)
 classifier.fit(X_train, Y_train)
-feature_imp = pd.Series(classifier.feature_importances_).sort_values(ascending=False)
-print(feature_imp)
-
 Y_pred = classifier.predict(X_validation)
 print(confusion_matrix(Y_validation,Y_pred))
 print(classification_report(Y_validation,Y_pred))
 print(accuracy_score(Y_validation, Y_pred))
-"""
