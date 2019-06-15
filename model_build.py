@@ -27,6 +27,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import GridSearchCV
 
+seed = 1234
+
 df = pd.read_csv("./ecoli_proteome_features.csv")
 
 # Final data set shape
@@ -44,8 +46,6 @@ df = df.drop(["U", "X", "A"], axis=1)
 # Drop colinear features with abs(r) > 0.5
 df = df.drop(["ss_mean", "hydro_mean"], axis=1)
 
-
-
 ## Number of soluble proteins
 print("soluble:" , df[df["Local"]==0].shape)
 
@@ -53,6 +53,7 @@ print("soluble:" , df[df["Local"]==0].shape)
 print("membrane:" , df[df["Local"]==1].shape)
 
 ## Little bit of a class imbalance
+df = shuffle(df, random_state=seed)
 balance_membrane_df = df[df["Local"]==1].iloc[0:874,]
 balance_soluble_df = df[df["Local"]==0]
 df = pd.concat([balance_membrane_df, balance_soluble_df])
@@ -63,9 +64,8 @@ df = pd.concat([balance_membrane_df, balance_soluble_df])
 print(len(list(df)[3:]))
 
 ## Ok Let's start testing some models
-
 # Shuffle training set
-df = shuffle(df, random_state=0)
+df = shuffle(df, random_state=seed)
 
 # Convert to np array
 array = df.values
@@ -80,7 +80,6 @@ Y = Y.astype("int")
 
 # Size of validation set
 validation_size = 0.40
-seed = 1234
 
 # Test options and evaluation metric
 scoring = 'accuracy'
@@ -100,8 +99,8 @@ X_validation = sc.transform(X_validation)
 models = []
 models.append(('LR', LogisticRegression()))
 models.append(('CART', DecisionTreeClassifier()))
-models.append(("RF", RandomForestClassifier(n_estimators=50, random_state=0)))
-models.append(("GB", GradientBoostingClassifier(n_estimators=50, random_state=0)))
+models.append(("RF", RandomForestClassifier(n_estimators=50, random_state=seed)))
+models.append(("GB", GradientBoostingClassifier(n_estimators=50, random_state=seed)))
 models.append(('SVM', SVC()))
 
 # Evaluate each model in turn
@@ -125,8 +124,8 @@ cv_results = []
 results = []
 nfolds = 5
 for kernel in kernels:
-    Cs = [0.001, 0.01, 0.1, 1, 10]
-    gammas = [0.001, 0.01, 0.1, 1]
+    Cs = [0.001, 0.005, 0.01, 0.05, 0.1, 0.5, 1, 5, 10]
+    gammas = [0.001, 0.005, 0.01, 0.05, 0.1, 0.5, 1]
     param_grid = {'C': Cs, 'gamma': gammas}
     grid_search = GridSearchCV(SVC(kernel=kernel), param_grid, cv=nfolds)
     grid_search.fit(X_train, Y_train)
@@ -141,7 +140,7 @@ for kernel in kernels:
 
 
 # Apply final model to validation set
-classifier = SVC(kernel="rbf", C=10, gamma=0.01)
+classifier = SVC(kernel="rbf", C=5, gamma=0.1)
 classifier.fit(X_train, Y_train)
 Y_pred = classifier.predict(X_validation)
 print(confusion_matrix(Y_validation,Y_pred))
