@@ -44,6 +44,21 @@ df = df.drop(["U", "X", "A"], axis=1)
 # Drop colinear features with abs(r) > 0.5
 df = df.drop(["ss_mean", "hydro_mean"], axis=1)
 
+
+
+## Number of soluble proteins
+print("soluble:" , df[df["Local"]==0].shape)
+
+## Number of membrane proteins
+print("membrane:" , df[df["Local"]==1].shape)
+
+## Little bit of a class imbalance
+balance_membrane_df = df[df["Local"]==1].iloc[0:874,]
+balance_soluble_df = df[df["Local"]==0]
+df = pd.concat([balance_membrane_df, balance_soluble_df])
+
+##############
+
 # Final number of features is now 10x less than number of observations
 print(len(list(df)[3:]))
 
@@ -64,7 +79,7 @@ Y = array[:, 2]
 Y = Y.astype("int")
 
 # Size of validation set
-validation_size = 0.30
+validation_size = 0.40
 seed = 1234
 
 # Test options and evaluation metric
