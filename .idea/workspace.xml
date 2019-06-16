@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="753c6acd-b12c-46ab-b26f-cd327fde37a1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evaluate_features.py" beforeDir="false" afterPath="$PROJECT_DIR$/evaluate_features.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/model_build_tune_describe-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/model_build_tune_describe-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_build.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_build.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model_build_tune_describe.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/model_build_tune_describe.ipynb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,7 +35,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/evaluate_features.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
+            <state relative-caret-position="-1216">
               <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
               <folding>
                 <element signature="e#318#327#0" expanded="true" />
@@ -47,20 +47,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model_build.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1965">
-              <caret line="56" selection-start-line="56" selection-end-line="59" selection-end-column="57" />
+            <state relative-caret-position="465">
+              <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
               <folding>
                 <element signature="e#154#173#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_3.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -85,13 +76,14 @@
         <option value="$PROJECT_DIR$/../Kaggle/vsb/train.py" />
         <option value="$PROJECT_DIR$/feature_extract.py" />
         <option value="$PROJECT_DIR$/scrape_uniprot.py" />
-        <option value="$PROJECT_DIR$/model_build.py" />
         <option value="$PROJECT_DIR$/evaluate_features.py" />
+        <option value="$PROJECT_DIR$/model_build_clean.py" />
+        <option value="$PROJECT_DIR$/model_build.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="52" />
+    <option name="x" value="-65" />
     <option name="y" value="23" />
     <option name="width" value="1439" />
     <option name="height" value="851" />
@@ -276,7 +268,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="52" y="23" width="1439" height="851" extended-state="0" />
+    <frame x="-65" y="23" width="1439" height="851" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14245416" />
@@ -318,6 +310,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scrape_uniprot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3009">
+          <caret line="129" column="32" selection-start-line="129" selection-start-column="14" selection-end-line="129" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_3.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
@@ -327,7 +326,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/evaluate_features.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
+        <state relative-caret-position="-1216">
           <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
           <folding>
             <element signature="e#318#327#0" expanded="true" />
@@ -342,17 +341,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scrape_uniprot.py">
+    <entry file="file://$PROJECT_DIR$/model_build_clean.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3009">
-          <caret line="129" column="32" selection-start-line="129" selection-start-column="14" selection-end-line="129" selection-end-column="32" />
+        <state relative-caret-position="617">
+          <caret line="54" column="4" lean-forward="true" selection-start-line="54" selection-start-column="4" selection-end-line="54" selection-end-column="4" />
+          <folding>
+            <element signature="e#154#173#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model_build.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1965">
-          <caret line="56" selection-start-line="56" selection-end-line="59" selection-end-column="57" />
+        <state relative-caret-position="465">
+          <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
           <folding>
             <element signature="e#154#173#0" expanded="true" />
           </folding>
