@@ -9,7 +9,7 @@ Specifically it will:
 Libraries:
     - Pandas
     - NumPy
-    -seaborn
+    - seaborn
 
 by MAS 06.2019
 """
