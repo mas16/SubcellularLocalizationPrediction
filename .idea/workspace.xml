@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="753c6acd-b12c-46ab-b26f-cd327fde37a1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/model_build_tune_describe-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/model_build_tune_describe-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model_build.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_build.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scrape_uniprot.py" beforeDir="false" afterPath="$PROJECT_DIR$/scrape_uniprot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_build_tune_describe.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/model_build_tune_describe.ipynb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,11 +18,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scrape_uniprot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="129" column="32" lean-forward="true" selection-start-line="129" selection-start-column="14" selection-end-line="129" selection-end-column="32" />
-              <folding>
-                <element signature="e#466#487#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="3075">
+              <caret line="129" column="32" selection-start-line="129" selection-start-column="14" selection-end-line="129" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -29,17 +27,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/feature_extract.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="409">
-              <caret line="25" column="40" lean-forward="true" selection-start-line="25" selection-end-line="25" selection-end-column="40" />
+            <state relative-caret-position="575">
+              <caret line="25" column="40" selection-start-line="25" selection-end-line="25" selection-end-column="40" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/evaluate_features.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1775">
-              <caret line="71" column="13" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
+            <state>
+              <caret column="3" selection-start-column="3" selection-end-column="3" />
               <folding>
                 <element signature="e#318#327#0" expanded="true" />
               </folding>
@@ -47,23 +45,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model_build.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3167">
-              <caret line="142" column="44" selection-start-line="142" selection-start-column="44" selection-end-line="142" selection-end-column="44" />
+            <state relative-caret-position="288">
+              <caret line="56" selection-start-line="56" selection-end-line="59" selection-end-column="57" />
               <folding>
                 <element signature="e#154#173#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../Kaggle/vsb/train.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="65" selection-start-line="65" selection-end-line="66" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -97,13 +86,13 @@
         <option value="$PROJECT_DIR$/../Kaggle/vsb/train.py" />
         <option value="$PROJECT_DIR$/feature_extract.py" />
         <option value="$PROJECT_DIR$/evaluate_features.py" />
-        <option value="$PROJECT_DIR$/model_build.py" />
         <option value="$PROJECT_DIR$/scrape_uniprot.py" />
+        <option value="$PROJECT_DIR$/model_build.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-25" />
+    <option name="x" value="52" />
     <option name="y" value="23" />
     <option name="width" value="1439" />
     <option name="height" value="851" />
@@ -114,6 +103,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -134,7 +124,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -288,7 +277,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-25" y="23" width="1439" height="851" extended-state="0" />
+    <frame x="52" y="23" width="1439" height="851" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14245416" />
@@ -323,6 +312,37 @@
         <state relative-caret-position="-3139" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../Kaggle/vsb/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1175">
+          <caret line="65" selection-start-line="65" selection-end-line="66" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scrape_uniprot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3075">
+          <caret line="129" column="32" selection-start-line="129" selection-start-column="14" selection-end-line="129" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/feature_extract.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="25" column="40" selection-start-line="25" selection-end-line="25" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/evaluate_features.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="3" selection-start-column="3" selection-end-column="3" />
+          <folding>
+            <element signature="e#318#327#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_3.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
@@ -330,46 +350,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Kaggle/vsb/train.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="65" selection-start-line="65" selection-end-line="66" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model_build.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3167">
-          <caret line="142" column="44" selection-start-line="142" selection-start-column="44" selection-end-line="142" selection-end-column="44" />
+        <state relative-caret-position="288">
+          <caret line="56" selection-start-line="56" selection-end-line="59" selection-end-column="57" />
           <folding>
             <element signature="e#154#173#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scrape_uniprot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="129" column="32" lean-forward="true" selection-start-line="129" selection-start-column="14" selection-end-line="129" selection-end-column="32" />
-          <folding>
-            <element signature="e#466#487#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/feature_extract.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="25" column="40" lean-forward="true" selection-start-line="25" selection-end-line="25" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/evaluate_features.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1775">
-          <caret line="71" column="13" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
-          <folding>
-            <element signature="e#318#327#0" expanded="true" />
           </folding>
         </state>
       </provider>

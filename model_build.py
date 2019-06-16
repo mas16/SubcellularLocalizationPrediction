@@ -26,6 +26,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import GridSearchCV
+import xgboost as xgb
 
 seed = 1234
 
@@ -64,7 +65,7 @@ df = pd.concat([balance_membrane_df, balance_soluble_df])
 print(len(list(df)[3:]))
 
 ## Ok Let's start testing some models
-# Shuffle training set
+# Shuffle data
 df = shuffle(df, random_state=seed)
 
 # Convert to np array
@@ -74,34 +75,35 @@ array = df.values
 X = array[:, 3:]
 X = X.astype("float")
 
-# Classification
+# Classes
 Y = array[:, 2]
 Y = Y.astype("int")
 
-# Size of validation set
-validation_size = 0.40
+# Size of test set
+test_size = 0.40
 
 # Test options and evaluation metric
 scoring = 'accuracy'
 
 # Set up train and validation sets
-X_train, X_validation, Y_train, Y_validation = \
-    model_selection.train_test_split(X, Y, test_size=validation_size,
+X_train, X_test, Y_train, Y_test = \
+    model_selection.train_test_split(X, Y, test_size=test_size,
                                      random_state=seed)
 
-# Try standardization
+# Standardize the data
 sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
-X_validation = sc.transform(X_validation)
+X_test = sc.transform(X_test)
 
 
 # Try different models
 models = []
-models.append(('LR', LogisticRegression()))
+models.append(('LR', LogisticRegression(solver="lbfgs")))
 models.append(('CART', DecisionTreeClassifier()))
-models.append(("RF", RandomForestClassifier(n_estimators=50, random_state=seed)))
-models.append(("GB", GradientBoostingClassifier(n_estimators=50, random_state=seed)))
-models.append(('SVM', SVC()))
+models.append(("RF", RandomForestClassifier(n_estimators=100, random_state=seed)))
+models.append(("GB", GradientBoostingClassifier(n_estimators=100, random_state=seed)))
+models.append(('SVM', SVC(gamma="scale")))
+#models.append(("XGBRF", xgb.XGBRFRegressor(random_state=seed)))
 
 # Evaluate each model in turn
 results = []
@@ -113,8 +115,7 @@ for name, model in models:
                                                  cv=kfold, scoring=scoring)
     results.append(cv_results)
     names.append(name)
-    msg = (name, cv_results.mean(), cv_results.std())
-    print(msg)
+    print(name, cv_results.mean(), cv_results.std())
 
 
 
@@ -142,7 +143,7 @@ for kernel in kernels:
 # Apply final model to validation set
 classifier = SVC(kernel="rbf", C=5, gamma=0.1)
 classifier.fit(X_train, Y_train)
-Y_pred = classifier.predict(X_validation)
-print(confusion_matrix(Y_validation,Y_pred))
-print(classification_report(Y_validation,Y_pred))
-print(accuracy_score(Y_validation, Y_pred))
+Y_pred = classifier.predict(X_test)
+print(confusion_matrix(Y_test,Y_pred))
+print(classification_report(Y_test,Y_pred))
+print(accuracy_score(Y_test, Y_pred))
