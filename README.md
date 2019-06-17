@@ -7,11 +7,11 @@ We now have access to an unprecedented amount of genomic information. However, h
 ## Preprocessing Scripts
 The data come from the proteome database of Uniprot for the bacterium *E.Coli*. The scripts for scraping, preprocessing, and feature engineering are:
 
-```scrape_uniprot.py```  
+```01_scrape_uniprot.py```  
 
-```feature_extract.py```  
+```02_extract_features.py```  
 
-```evaluate_features.py```  
+```03_evaluate_features.py```  
 
 ## Model Building and Prediction
-To see how I built the model, tuned hyperparameters, and used it for prediction, see the ```model_build_tune_describe.ipynb``` notebook.
+To see how I built the model, tuned hyperparameters, and used it for prediction, see the ```05_model_build_tune_describe.ipynb``` notebook.

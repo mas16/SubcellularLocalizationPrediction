@@ -20,6 +20,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import matthews_corrcoef
 
 # Set random seed
 seed = 1234
@@ -93,7 +94,6 @@ X_test = sc.transform(X_test)
 models = [('LR', LogisticRegression(solver="lbfgs")),
           ('CART', DecisionTreeClassifier()),
           ("RF", RandomForestClassifier(n_estimators=100, random_state=seed)),
-          ("RF", RandomForestClassifier(n_estimators=100, random_state=seed)),
           ("GB", GradientBoostingClassifier(n_estimators=100,
                                             random_state=seed)),
           ('SVM', SVC(gamma="scale"))]
@@ -141,3 +141,5 @@ print("Confustion Matrix: ")
 print(confusion_matrix(Y_test, Y_prediction))
 print(classification_report(Y_test, Y_prediction))
 print("Accuracy: ", accuracy_score(Y_test, Y_prediction))
+print("Matthews Correlation Coefficient: ",
+      matthews_corrcoef(Y_test, Y_prediction))
