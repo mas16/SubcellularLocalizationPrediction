@@ -13,5 +13,9 @@ The data come from the proteome database of Uniprot for the bacterium *E.Coli*. 
 
 ```03_evaluate_features.py```  
 
-## Model Building and Prediction
+## Model Building Script
+The script used for model building is"
+```04_model_build_tune.py```
+
+## Model Building and Prediction Jupyter Notebook
 To see how I built the model, tuned hyperparameters, and used it for prediction, see the ```05_model_build_tune_describe.ipynb``` notebook.
